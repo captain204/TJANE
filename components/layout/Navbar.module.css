@@ -1,0 +1,122 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--background);
+    border-bottom: 1px solid var(--border);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.navContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--foreground);
+    text-decoration: none;
+}
+
+.logoHighlight {
+    color: var(--primary);
+}
+
+.desktopNav {
+    display: none;
+    align-items: center;
+    gap: 2rem;
+}
+
+.navLink {
+    color: var(--foreground);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+}
+
+.navLink:hover {
+    color: var(--primary);
+}
+
+/* Mobile Toggle */
+.mobileToggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.hamburger {
+    width: 24px;
+    height: 2px;
+    background-color: var(--foreground);
+    position: relative;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background-color: var(--foreground);
+    left: 0;
+}
+
+.hamburger::before {
+    top: -6px;
+}
+
+.hamburger::after {
+    bottom: -6px;
+}
+
+/* Mobile Menu Overlay */
+.mobileMenu {
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background-color: var(--background);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mobileNavLink {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--foreground);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+@media (min-width: 768px) {
+    .desktopNav {
+        display: flex;
+    }
+
+    .mobileToggle {
+        display: none;
+    }
+
+    .mobileMenu {
+        display: none;
+    }
+}

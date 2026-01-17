@@ -1,0 +1,17 @@
+.section {
+    padding: 5rem 0;
+}
+
+.white {
+    background-color: var(--background);
+}
+
+.gray {
+    background-color: var(--gray-light);
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 3rem 0;
+    }
+}

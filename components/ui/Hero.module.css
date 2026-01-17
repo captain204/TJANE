@@ -1,0 +1,105 @@
+.hero {
+    position: relative;
+    min-height: 600px;
+    background-color: #1a1a1a;
+    /* Fallback */
+    background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    /* Medical training generic */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7));
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+.content {
+    max-width: 700px;
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.highlight {
+    color: var(--primary);
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+}
+
+.searchBox {
+    display: flex;
+    gap: 0.5rem;
+    background: white;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    max-width: 500px;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.searchInput {
+    flex: 1;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    outline: none;
+    min-width: 200px;
+}
+
+.trustSignals {
+    display: flex;
+    gap: 2rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 500px;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .searchBox {
+        flex-direction: column;
+        background: transparent;
+        padding: 0;
+        gap: 1rem;
+    }
+
+    .searchInput {
+        padding: 1rem;
+        border-radius: var(--radius);
+        width: 100%;
+    }
+
+    .trustSignals {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

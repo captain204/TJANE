@@ -1,0 +1,42 @@
+.card {
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.normal {
+    padding: 0;
+}
+
+.none {
+    padding: 0;
+}
+
+.header {
+    padding: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.content {
+    padding: 1.5rem;
+    padding-top: 0.5rem;
+    flex: 1;
+}
+
+.footer {
+    padding: 1.5rem;
+    background-color: var(--gray-light);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
