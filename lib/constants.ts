@@ -10,6 +10,55 @@ export const COMPANY_INFO = {
 
 export const COURSES = [
     {
+        title: "Medical Assistant",
+        slug: "medical-assistant",
+        description: "Clinical and administrative training for future medical assistants in healthcare settings.",
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["Clinical", "Medical Assistant"]
+    },
+    {
+        title: "Medical Coding and Billing Professional",
+        slug: "medical-coding-and-billing",
+        description: "Master medical terminology and coding systems like ICD-10 and CPT for billing excellence.",
+        image: "https://images.unsplash.com/photo-1554224155-1696413565d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["Professional", "Billing", "Coding"]
+    },
+    {
+        title: "Dental Assistant",
+        slug: "dental-assistant",
+        description: "Comprehensive training for assisting dental professionals and managing patient care in dental offices.",
+        image: "https://images.unsplash.com/photo-1516574187841-69301905a304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["Clinical", "Dental"]
+    },
+    {
+        title: "Pharmacy Technician",
+        slug: "pharmacy-technician",
+        description: "Essential skills for a career in pharmacy, focusing on medication distribution and safety.",
+        image: "https://images.unsplash.com/photo-1587854692152-cbe660dbbb88?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["Pharmacy", "Technical"]
+    },
+    {
+        title: "Mental Health Technician",
+        slug: "mental-health-technician",
+        description: "Prepare to support individuals with behavioral and mental health challenges in clinical settings.",
+        image: "https://images.unsplash.com/photo-1527137341206-18090773ff03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["Mental Health", "Clinical"]
+    },
+    {
+        title: "Patient Care Technician",
+        slug: "patient-care-technician",
+        description: "Gain hands-on skills in direct patient care, including phlebotomy and basic EKG. ",
+        image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["Nursing", "Clinical"]
+    },
+    {
+        title: "All other programs",
+        slug: "other-programs",
+        description: "Explore our range of additional specialized healthcare and professional certification programs.",
+        image: "https://images.unsplash.com/photo-1554224155-1696413565d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["Programs", "Certifications"]
+    },
+    {
         title: "CPR AED Training + First Aid Training",
         slug: "cpr-aed-first-aid-training",
         description: "Comprehensive training covering CPR, AED usage, and essential First Aid skills for various emergencies.",
@@ -88,7 +137,7 @@ export const COURSES = [
     },
     {
         title: "Adult CEPAED with Bloodborne Pathogen",
-        slug: "adult-cpr-aed-bloodborne-pathogen", // Corrected slug from CEPAED typo in prompt if reasonable, assuming it meant CPR AED. Let's assume user typo "CEPAED" -> CPR AED
+        slug: "adult-cpr-aed-bloodborne-pathogen",
         description: "Adult CPR and AED training combined with bloodborne pathogen safety curriculum.",
         image: "https://images.unsplash.com/photo-1581093458791-9f302e6d8359?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         tags: ["Adult", "CPR", "AED", "Bloodborne Pathogens"]
