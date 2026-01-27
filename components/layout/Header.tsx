@@ -8,7 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isProgramsDropdownOpen, setIsProgramsDropdownOpen] = useState(false);
+    const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -17,8 +18,15 @@ const Header = () => {
     const navLinks = [
         { name: "Home", href: "/" },
         { name: "About Us", href: "/about" },
-        { name: "Services", href: "/services" },
+        // Services is now a dropdown handled separately
         { name: "Contact", href: "/contact" },
+    ];
+
+    const services = [
+        { name: "Trainings", href: "/services" },
+        { name: "Career program", href: "https://www.careerstep.com/lp/partner/ap/tjanehealth/", external: true },
+        { name: "Staffing agency", href: "/staffing-agency" },
+        { name: "Careers", href: "/careers" },
     ];
 
     const programs = [
@@ -55,41 +63,87 @@ const Header = () => {
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center space-x-8">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className="text-gray-700 hover:text-brand-primary font-medium transition-colors duration-200"
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
+                        {/* Static Links (Home, About) */}
+                        <Link
+                            href="/"
+                            className="text-gray-700 hover:text-brand-primary font-medium transition-colors duration-200"
+                        >
+                            Home
+                        </Link>
+                        <Link
+                            href="/about"
+                            className="text-gray-700 hover:text-brand-primary font-medium transition-colors duration-200"
+                        >
+                            About Us
+                        </Link>
 
-                        {/* Programs Dropdown */}
+                        {/* Services Dropdown */}
                         <div
                             className="relative group"
-                            onMouseEnter={() => setIsDropdownOpen(true)}
-                            onMouseLeave={() => setIsDropdownOpen(false)}
+                            onMouseEnter={() => setIsServicesDropdownOpen(true)}
+                            onMouseLeave={() => setIsServicesDropdownOpen(false)}
                         >
                             <button
                                 className="flex items-center gap-1 text-gray-700 group-hover:text-brand-primary font-medium transition-colors duration-200"
-                                aria-expanded={isDropdownOpen}
+                                aria-expanded={isServicesDropdownOpen}
                             >
-                                Programs and Certifications
+                                Services
                                 <ChevronDown
                                     size={16}
-                                    className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
+                                    className={`transition-transform duration-200 ${isServicesDropdownOpen ? 'rotate-180' : ''}`}
                                 />
                             </button>
 
                             <AnimatePresence>
-                                {isDropdownOpen && (
+                                {isServicesDropdownOpen && (
                                     <motion.div
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: 10 }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute left-0 mt-2 w-72 bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden"
+                                        className="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden z-50"
+                                    >
+                                        {services.map((service) => (
+                                            <Link
+                                                key={service.name}
+                                                href={service.href}
+                                                target={service.external ? "_blank" : undefined}
+                                                rel={service.external ? "noopener noreferrer" : undefined}
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-primary-50 hover:text-brand-primary transition-colors duration-150"
+                                            >
+                                                {service.name}
+                                            </Link>
+                                        ))}
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+
+                        {/* Programs Dropdown */}
+                        <div
+                            className="relative group"
+                            onMouseEnter={() => setIsProgramsDropdownOpen(true)}
+                            onMouseLeave={() => setIsProgramsDropdownOpen(false)}
+                        >
+                            <button
+                                className="flex items-center gap-1 text-gray-700 group-hover:text-brand-primary font-medium transition-colors duration-200"
+                                aria-expanded={isProgramsDropdownOpen}
+                            >
+                                Programs and Certifications
+                                <ChevronDown
+                                    size={16}
+                                    className={`transition-transform duration-200 ${isProgramsDropdownOpen ? 'rotate-180' : ''}`}
+                                />
+                            </button>
+
+                            <AnimatePresence>
+                                {isProgramsDropdownOpen && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: 10 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="absolute left-0 mt-2 w-72 bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden z-50"
                                     >
                                         {programs.map((program) => (
                                             <Link
@@ -104,6 +158,13 @@ const Header = () => {
                                 )}
                             </AnimatePresence>
                         </div>
+
+                        <Link
+                            href="/contact"
+                            className="text-gray-700 hover:text-brand-primary font-medium transition-colors duration-200"
+                        >
+                            Contact
+                        </Link>
                     </nav>
 
                     {/* Mobile Menu Button */}
@@ -129,18 +190,42 @@ const Header = () => {
                         className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
                     >
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    href={link.href}
-                                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-primary hover:bg-gray-50 transition-colors"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
+                            <Link
+                                href="/"
+                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-primary hover:bg-gray-50 transition-colors"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Home
+                            </Link>
+                            <Link
+                                href="/about"
+                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-primary hover:bg-gray-50 transition-colors"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                About Us
+                            </Link>
+
+                            {/* Mobile Services */}
+                            <div className="pt-2 pb-2">
+                                <div className="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                                    Services
+                                </div>
+                                {services.map((service) => (
+                                    <Link
+                                        key={service.name}
+                                        href={service.href}
+                                        target={service.external ? "_blank" : undefined}
+                                        rel={service.external ? "noopener noreferrer" : undefined}
+                                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-brand-primary hover:bg-gray-50 transition-colors pl-6"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        {service.name}
+                                    </Link>
+                                ))}
+                            </div>
+
                             {/* Mobile Programs */}
-                            <div className="pt-4 pb-2 border-t border-gray-50">
+                            <div className="pt-2 pb-2 border-t border-gray-50">
                                 <div className="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
                                     Programs and Certifications
                                 </div>
@@ -155,6 +240,14 @@ const Header = () => {
                                     </Link>
                                 ))}
                             </div>
+
+                            <Link
+                                href="/contact"
+                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-primary hover:bg-gray-50 transition-colors border-t border-gray-50 mt-2"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Contact
+                            </Link>
                         </div>
                     </motion.div>
                 )}

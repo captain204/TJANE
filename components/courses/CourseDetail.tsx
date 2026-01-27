@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle2, Clock, MapPin, Award } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { BookingForm } from "@/components/ui/BookingForm";
 
 interface Course {
     title: string;
@@ -14,6 +16,8 @@ interface Course {
 }
 
 export const CourseDetail = ({ course }: { course: Course }) => {
+    const [showBooking, setShowBooking] = useState(false);
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -97,24 +101,42 @@ export const CourseDetail = ({ course }: { course: Course }) => {
                             ))}
                         </div>
 
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                                <Link
-                                    href="/corporate-training"
-                                    className="w-full inline-flex items-center justify-center px-8 py-4 bg-brand-primary-600 text-white font-bold rounded-xl hover:bg-brand-primary-700 transition-colors shadow-lg shadow-brand-primary-200"
-                                >
-                                    Book Corporate Training
-                                </Link>
+                        {!showBooking ? (
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full">
+                                    <button
+                                        onClick={() => setShowBooking(true)}
+                                        className="w-full inline-flex items-center justify-center px-8 py-4 bg-brand-primary-600 text-white font-bold rounded-xl hover:bg-brand-primary-700 transition-colors shadow-lg shadow-brand-primary-200"
+                                    >
+                                        Book Now
+                                    </button>
+                                </motion.div>
+                                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full">
+                                    <Link
+                                        href="/contact"
+                                        className="w-full inline-flex items-center justify-center px-8 py-4 border-2 border-brand-primary-100 text-brand-primary-700 font-bold rounded-xl hover:bg-brand-primary-50 transition-colors"
+                                    >
+                                        Contact Us
+                                    </Link>
+                                </motion.div>
+                            </div>
+                        ) : (
+                            <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                transition={{ duration: 0.5 }}
+                            >
+                                <BookingForm courseTitle={course.title} />
+                                <div className="mt-4 text-center">
+                                    <button
+                                        onClick={() => setShowBooking(false)}
+                                        className="text-gray-500 hover:text-gray-700 text-sm underline"
+                                    >
+                                        Cancel Booking
+                                    </button>
+                                </div>
                             </motion.div>
-                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                                <Link
-                                    href="/contact"
-                                    className="w-full inline-flex items-center justify-center px-8 py-4 border-2 border-brand-primary-100 text-brand-primary-700 font-bold rounded-xl hover:bg-brand-primary-50 transition-colors"
-                                >
-                                    Contact Us
-                                </Link>
-                            </motion.div>
-                        </div>
+                        )}
                     </motion.div>
                 </motion.div>
             </div>

@@ -1,0 +1,235 @@
+/* react-day-picker v9.0.0 */
+.rdp-root {
+  --rdp-accent-color: #0000ff;
+  --rdp-accent-background-color: #f0f0ff;
+  --rdp-day-font: inherit;
+  --rdp-day-size: 40px;
+  --rdp-day_button-border-radius: 100%;
+  --rdp-day_button-border: 2px solid transparent;
+  --rdp-day_button-height: var(--rdp-day-size);
+  --rdp-day_button-width: var(--rdp-day-size);
+  --rdp-selected-border: 2px solid var(--rdp-accent-color);
+  --rdp-disabled-opacity: 0.5;
+  --rdp-outside-opacity: 0.75;
+  --rdp-today-color: var(--rdp-accent-color);
+  --rdp-dropdown-gap: 8px;
+  --rdp-months-gap: 2rem;
+  --rdp-nav_button-disabled-opacity: 0.5;
+  --rdp-nav_button-height: 2.25rem;
+  --rdp-nav_button-width: 2.25rem;
+  --rdp-nav_icon-height: 1.25rem;
+  --rdp-nav_icon-width: 1.25rem;
+  --rdp-week_head-color: currentColor;
+  --rdp-week_head-font: inherit;
+  --rdp-weeknumber-font: inherit;
+  --rdp-weeknumber-height: var(--rdp-day-size);
+  --rdp-weeknumber-width: var(--rdp-day-size);
+  --rdp-weeknumber-border-radius: 100%;
+  --rdp-weekday-opacity: 0.75;
+  --rdp-weekday-padding: 0.5rem 0rem;
+  --rdp-weekday-font: inherit;
+  
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--rdp-months-gap);
+}
+
+.rdp-root[dir="rtl"] {
+  direction: rtl;
+}
+
+.rdp-month_grid {
+  border-collapse: collapse;
+}
+
+.rdp-months {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rdp-months-gap);
+  justify-content: center;
+}
+
+.rdp-month_caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  height: var(--rdp-nav_button-height);
+}
+
+.rdp-caption_label {
+  z-index: 1;
+  font-size: large;
+  font-weight: bold;
+}
+
+.rdp-nav {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.rdp-multiple_months .rdp-caption_label {
+  display: block;
+  text-align: center;
+}
+
+.rdp-nav_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--rdp-nav_button-width);
+  height: var(--rdp-nav_button-height);
+  padding: 0;
+  border-radius: 100%;
+  cursor: pointer;
+  background-color: transparent;
+  border: 2px solid transparent;
+  color: inherit;
+  outline: none;
+}
+
+.rdp-nav_button:hover:not([disabled]) {
+  background-color: var(--rdp-accent-background-color);
+}
+
+.rdp-nav_button:focus-visible:not([disabled]) {
+  border-color: var(--rdp-accent-color);
+  background-color: var(--rdp-accent-background-color);
+}
+
+.rdp-nav_button:active:not([disabled]) {
+  background-color: var(--rdp-accent-color);
+  color: white;
+}
+
+.rdp-nav_button[disabled] {
+  cursor: not-allowed;
+  opacity: var(--rdp-nav_button-disabled-opacity);
+}
+
+.rdp-chevron {
+  display: inline-block;
+  fill: currentColor;
+  width: var(--rdp-nav_icon-width);
+  height: var(--rdp-nav_icon-height);
+}
+
+.rdp-dropdowns {
+  display: flex;
+  align-items: center;
+  gap: var(--rdp-dropdown-gap);
+}
+
+.rdp-dropdown {
+  z-index: 2;
+  /* Reset the button style */
+  opacity: 0;
+  appearance: none;
+  position: absolute;
+  inset-block-start: 0;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.rdp-dropdown_root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.rdp-dropdown_root[data-selected="true"] {
+  display: inline-flex;
+  align-items: center;
+}
+
+.rdp-dropdown_root:focus-within {
+  outline: 2px solid var(--rdp-accent-color);
+  outline-offset: 2px;
+}
+
+.rdp-map_hidden {
+  display: none;
+}
+
+.rdp-weekday {
+  opacity: var(--rdp-weekday-opacity);
+  padding: var(--rdp-weekday-padding);
+  font-family: var(--rdp-weekday-font);
+  font-size: smaller;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 500;
+}
+
+.rdp-week_number {
+  opacity: var(--rdp-weekday-opacity);
+  font-family: var(--rdp-weeknumber-font);
+  height: var(--rdp-weeknumber-height);
+  width: var(--rdp-weeknumber-width);
+  border-radius: var(--rdp-weeknumber-border-radius);
+  text-align: center;
+  font-size: small;
+  font-weight: 400;
+}
+
+.rdp-day {
+  width: var(--rdp-day-size);
+  height: var(--rdp-day-size);
+  text-align: center;
+}
+
+.rdp-day_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: transparent;
+  border: var(--rdp-day_button-border);
+  border-radius: var(--rdp-day_button-border-radius);
+  color: inherit;
+  font-family: var(--rdp-day-font);
+  font-size: inherit;
+  width: var(--rdp-day_button-width);
+  height: var(--rdp-day_button-height);
+  padding: 0;
+}
+
+.rdp-day_button:focus-visible:not([disabled]) {
+  color: inherit;
+  background-color: var(--rdp-accent-background-color);
+  border: var(--rdp-selected-border);
+}
+
+.rdp-day_button:hover:not([disabled]):not([aria-selected="true"]) {
+  background-color: var(--rdp-accent-background-color);
+  border: var(--rdp-selected-border);
+}
+
+.rdp-day_button[aria-selected="true"] {
+  background-color: var(--rdp-accent-color);
+  color: white;
+}
+
+.rdp-day_button[disabled] {
+  opacity: var(--rdp-disabled-opacity);
+  cursor: not-allowed;
+}
+
+.rdp-outside {
+  opacity: var(--rdp-outside-opacity);
+}
+
+.rdp-today:not([aria-selected="true"]) {
+  color: var(--rdp-today-color);
+  font-weight: bold;
+}
+
+.rdp-hidden {
+  visibility: hidden;
+}

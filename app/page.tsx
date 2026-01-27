@@ -1,7 +1,7 @@
 "use client";
 
 import { Hero } from "@/components/home/Hero";
-import { CalendarBooking } from "@/components/ui/Calendar";
+import { BookingForm } from "@/components/ui/BookingForm";
 import { CourseCard } from "@/components/ui/CourseCard";
 import { motion } from "framer-motion";
 import { CheckCircle2, Award, Users, Star } from "lucide-react";
@@ -68,7 +68,7 @@ export default function Home() {
               </div>
 
               <div>
-                <CalendarBooking />
+                <BookingForm />
               </div>
             </div>
           </div>
