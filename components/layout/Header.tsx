@@ -36,6 +36,7 @@ const Header = () => {
         { name: "Pharmacy Technician", href: "/courses/pharmacy-technician" },
         { name: "Mental Health Technician", href: "/courses/mental-health-technician" },
         { name: "Patient Care Technician", href: "/courses/patient-care-technician" },
+        { name: "Anger Management", href: "/anger-management" },
         { name: "All other programs", href: "/courses/other-programs" },
     ];
 
@@ -101,19 +102,21 @@ const Header = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: 10 }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden z-50"
+                                        className="absolute left-0 pt-4 w-56 z-50"
                                     >
-                                        {services.map((service) => (
-                                            <Link
-                                                key={service.name}
-                                                href={service.href}
-                                                target={service.external ? "_blank" : undefined}
-                                                rel={service.external ? "noopener noreferrer" : undefined}
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-primary-50 hover:text-brand-primary transition-colors duration-150"
-                                            >
-                                                {service.name}
-                                            </Link>
-                                        ))}
+                                        <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden">
+                                            {services.map((service) => (
+                                                <Link
+                                                    key={service.name}
+                                                    href={service.href}
+                                                    target={service.external ? "_blank" : undefined}
+                                                    rel={service.external ? "noopener noreferrer" : undefined}
+                                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-primary-50 hover:text-brand-primary-600 transition-colors duration-150"
+                                                >
+                                                    {service.name}
+                                                </Link>
+                                            ))}
+                                        </div>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -143,17 +146,19 @@ const Header = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: 10 }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute left-0 mt-2 w-72 bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden z-50"
+                                        className="absolute left-0 pt-4 w-72 z-50"
                                     >
-                                        {programs.map((program) => (
-                                            <Link
-                                                key={program.name}
-                                                href={program.href}
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-primary-50 hover:text-brand-primary transition-colors duration-150"
-                                            >
-                                                {program.name}
-                                            </Link>
-                                        ))}
+                                        <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden">
+                                            {programs.map((program) => (
+                                                <Link
+                                                    key={program.name}
+                                                    href={program.href}
+                                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-primary-50 hover:text-brand-primary-600 transition-colors duration-150"
+                                                >
+                                                    {program.name}
+                                                </Link>
+                                            ))}
+                                        </div>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -164,6 +169,13 @@ const Header = () => {
                             className="text-gray-700 hover:text-brand-primary font-medium transition-colors duration-200"
                         >
                             Contact
+                        </Link>
+
+                        <Link
+                            href="/courses"
+                            className="bg-brand-primary-600 text-white hover:bg-brand-primary-700 px-5 py-2 rounded-lg font-medium shadow-sm hover:shadow transition-all duration-200"
+                        >
+                            Book a Course
                         </Link>
                     </nav>
 
@@ -247,6 +259,14 @@ const Header = () => {
                                 onClick={() => setIsOpen(false)}
                             >
                                 Contact
+                            </Link>
+
+                            <Link
+                                href="/courses"
+                                className="block px-3 py-3 mt-4 text-center rounded-lg text-base font-bold text-white bg-brand-primary-600 hover:bg-brand-primary-700 transition-colors shadow-md mx-2"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Book a Course
                             </Link>
                         </div>
                     </motion.div>

@@ -23,6 +23,7 @@ export const BookingForm = ({ courseTitle }: BookingFormProps) => {
         phone: "",
         notes: ""
     });
+    const [paymentOption, setPaymentOption] = useState<"single" | "full">("single");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState("");
@@ -70,34 +71,30 @@ export const BookingForm = ({ courseTitle }: BookingFormProps) => {
         setError("");
 
         try {
-            const htmlContent = `
-                <h3>New Course Booking</h3>
-                <p><strong>Course:</strong> ${selectedCourse}</p>
-                <p><strong>Date:</strong> ${date ? format(date, 'PPP') : 'N/A'}</p>
-                <p><strong>Time:</strong> ${time}</p>
-                <p><strong>Name:</strong> ${formData.name}</p>
-                <p><strong>Email:</strong> ${formData.email}</p>
-                <p><strong>Phone:</strong> ${formData.phone}</p>
-                <p><strong>Notes:</strong> ${formData.notes}</p>
-            `;
-
-            const res = await fetch('/api/send', {
+            const res = await fetch('/api/checkout', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    to: formData.email, // In a real app, this would be the admin email, with the user as CC or Reply-To
-                    replyTo: formData.email,
-                    subject: `New Booking: ${selectedCourse} - ${formData.name}`,
-                    html: htmlContent
+                    course: selectedCourse,
+                    date: date ? format(date, 'PPP') : '',
+                    time,
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    notes: formData.notes,
+                    paymentOption
                 })
             });
 
-            if (!res.ok) throw new Error("Failed to submit booking");
+            const data = await res.json();
 
-            setIsSuccess(true);
-        } catch (err) {
-            setError("Something went wrong. Please try again.");
-        } finally {
+            if (!res.ok) throw new Error(data.error || "Failed to create checkout session");
+
+            // Redirect to Stripe Checkout
+            window.location.href = data.url;
+
+        } catch (err: any) {
+            setError(err.message || "Something went wrong. Please try again.");
             setIsSubmitting(false);
         }
     };
@@ -320,6 +317,42 @@ export const BookingForm = ({ courseTitle }: BookingFormProps) => {
                                         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                                     />
                                 </div>
+
+                                {selectedCourse === "Anger Management" && (
+                                    <div className="bg-brand-primary-50 p-4 rounded-xl border border-brand-primary-100 mb-4">
+                                        <label className="block text-sm font-bold text-gray-900 mb-3">Payment Option</label>
+                                        <div className="space-y-3">
+                                            <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border bg-white hover:border-brand-primary transition-colors">
+                                                <input
+                                                    type="radio"
+                                                    name="paymentOption"
+                                                    value="single"
+                                                    checked={paymentOption === "single"}
+                                                    onChange={() => setPaymentOption("single")}
+                                                    className="w-4 h-4 text-brand-primary focus:ring-brand-primary"
+                                                />
+                                                <div className="flex flex-col">
+                                                    <span className="font-semibold text-gray-900">Pay per session ($25)</span>
+                                                    <span className="text-xs text-gray-500">You will be charged $25 today for the first session.</span>
+                                                </div>
+                                            </label>
+                                            <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border bg-white hover:border-brand-primary transition-colors">
+                                                <input
+                                                    type="radio"
+                                                    name="paymentOption"
+                                                    value="full"
+                                                    checked={paymentOption === "full"}
+                                                    onChange={() => setPaymentOption("full")}
+                                                    className="w-4 h-4 text-brand-primary focus:ring-brand-primary"
+                                                />
+                                                <div className="flex flex-col">
+                                                    <span className="font-semibold text-gray-900">Pay fully for 12 sessions ($300)</span>
+                                                    <span className="text-xs text-gray-500">Save time by paying for all 12 sessions upfront.</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                )}
 
                                 {error && <p className="text-red-500 text-sm">{error}</p>}
 

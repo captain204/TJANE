@@ -148,5 +148,12 @@ export const COURSES = [
         description: "Specialized training on recognizing and treating severe allergic reactions and asthma.",
         image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         tags: ["Asthma", "Anaphylaxis", "Epinephrine"]
+    },
+    {
+        title: "Anger Management",
+        slug: "anger-management",
+        description: "Comprehensive 12-session anger management course designed to help you understand and manage your emotions effectively.",
+        image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        tags: ["Mental Health", "Wellness"]
     }
 ];
