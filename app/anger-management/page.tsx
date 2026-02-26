@@ -32,7 +32,7 @@ export default function AngerManagementPage() {
                                 <circle fill="#84cc16" cx="50" cy="15" r="10" />
                             </svg>
                         </div>
-                        <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Tjane_health</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 tracking-tight">TJANE Health</h2>
                         <p className="text-sm font-medium text-gray-600 uppercase tracking-widest mt-1">Together we can save lives</p>
                     </div>
 
@@ -160,7 +160,7 @@ export default function AngerManagementPage() {
                                 <HeadphonesIcon className="w-12 h-12 text-white" />
                             </div>
                             <h4 className="text-xl font-bold text-gray-800 mb-3 uppercase tracking-wider">Expert Guidance</h4>
-                            <p className="text-gray-600">Led by qualified and experienced therapists</p>
+                            <p className="text-gray-600">Led by experienced anger management specialists</p>
                         </div>
                     </div>
 
