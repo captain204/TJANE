@@ -3,6 +3,7 @@
 import { Hero } from "@/components/home/Hero";
 import { BookingForm } from "@/components/ui/BookingForm";
 import { CourseCard } from "@/components/ui/CourseCard";
+import { GoogleReviews } from "@/components/ui/GoogleReviews";
 import { motion } from "framer-motion";
 import { CheckCircle2, Award, Users, Star } from "lucide-react";
 
@@ -127,6 +128,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Google Reviews */}
+      <GoogleReviews />
     </div>
   );
 }

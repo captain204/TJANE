@@ -73,23 +73,26 @@ export const COURSES = [
         tags: ["CPR", "AED"]
     },
     {
-        title: "Corporate Training",
-        slug: "corporate-training",
-        description: "Tailored health and safety training solutions for businesses and organizations.",
+        title: "Corporate First Aid CPR AED Training",
+        price: 64.95,
+        slug: "corporate-first-aid-cpr-aed-training",
+        description: "Group/corporate version of first aid and CPR training.",
         image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         tags: ["Corporate", "Business"]
     },
     {
-        title: "BLS Instructor Training",
-        slug: "bls-instructor-training",
-        description: " Become a certified Basic Life Support (BLS) instructor and teach others life-saving skills.",
+        title: "BLS Provider Instructor – AHA Instructor Training",
+        price: 650,
+        slug: "bls-provider-instructor-aha",
+        description: "Prepares you to teach AHA BLS and issue certification cards.",
         image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         tags: ["BLS", "Instructor"]
     },
     {
-        title: "BLS Renewal Class",
-        slug: "bls-renewal-class",
-        description: "Refresher course for healthcare providers to renew their Basic Life Support certification.",
+        title: "BLS Provider – American Heart Association (AHA)",
+        price: 85,
+        slug: "bls-provider-aha",
+        description: "Teaches healthcare professionals lifesaving skills like high-quality CPR, ventilations, and AED use.",
         image: "https://images.unsplash.com/photo-1576091160550-2187d80a5873?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         tags: ["BLS", "Renewal"]
     },
@@ -101,9 +104,10 @@ export const COURSES = [
         tags: ["First Aid"]
     },
     {
-        title: "Adult First Aid CPR AED",
-        slug: "adult-first-aid-cpr-aed",
-        description: "Specialized training for adult victims combining First Aid, CPR, and AED deployment.",
+        title: "Heartsaver® First Aid CPR AED",
+        price: 150,
+        slug: "heartsaver-first-aid-cpr-aed",
+        description: "Specialized training combining First Aid, CPR, and AED deployment.",
         image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         tags: ["Adult", "First Aid", "CPR", "AED"]
     },

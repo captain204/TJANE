@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { COURSES } from '@/lib/constants';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
     apiVersion: '2023-10-16' as any,
@@ -10,7 +11,8 @@ export async function POST(req: Request) {
         const body = await req.json();
         const { course, date, time, name, email, phone, notes, paymentOption } = body;
 
-        let unit_amount = 2500; // $25.00 in cents
+        const selectedCourse = COURSES.find(c => c.title === course);
+        let unit_amount = (selectedCourse as any)?.price ? Math.round((selectedCourse as any).price * 100) : 2500; // default to $25.00 in cents
         let description = `Date: ${date}, Time: ${time}`;
         let productName = `Booking for ${course}`;
 
