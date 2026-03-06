@@ -210,7 +210,7 @@ export default function AngerManagementPage() {
                         <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary-100 rounded-full -mr-32 -mt-32 opacity-50 pointer-events-none"></div>
                         <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center relative z-10">Book Your Session Instantly</h3>
                         <div className="relative z-10 max-w-3xl mx-auto backdrop-blur-sm bg-white/50 p-4 rounded-xl">
-                            <BookingForm courseTitle="Anger Management" />
+                            <BookingForm courseTitle="Anger Management" isAngerManagementPage={true} />
                         </div>
                     </div>
                 </div>
