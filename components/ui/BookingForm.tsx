@@ -23,6 +23,8 @@ export const BookingForm = ({ courseTitle }: BookingFormProps) => {
         phone: "",
         notes: ""
     });
+    const [reason, setReason] = useState("");
+    const [otherReason, setOtherReason] = useState("");
     const [paymentOption, setPaymentOption] = useState<"single" | "full">("single");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -82,7 +84,8 @@ export const BookingForm = ({ courseTitle }: BookingFormProps) => {
                     email: formData.email,
                     phone: formData.phone,
                     notes: formData.notes,
-                    paymentOption
+                    paymentOption,
+                    reason: reason === "Other(explain)" ? `Other: ${otherReason}` : reason
                 })
             });
 
@@ -117,6 +120,8 @@ export const BookingForm = ({ courseTitle }: BookingFormProps) => {
                         setTime("");
                         if (!courseTitle) setSelectedCourse("");
                         setFormData({ name: "", email: "", phone: "", notes: "" });
+                        setReason("");
+                        setOtherReason("");
                     }}
                     className="text-brand-primary font-medium hover:underline"
                 >
@@ -319,39 +324,72 @@ export const BookingForm = ({ courseTitle }: BookingFormProps) => {
                                 </div>
 
                                 {selectedCourse === "Anger Management" && (
-                                    <div className="bg-brand-primary-50 p-4 rounded-xl border border-brand-primary-100 mb-4">
-                                        <label className="block text-sm font-bold text-gray-900 mb-3">Payment Option</label>
-                                        <div className="space-y-3">
-                                            <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border bg-white hover:border-brand-primary transition-colors">
-                                                <input
-                                                    type="radio"
-                                                    name="paymentOption"
-                                                    value="single"
-                                                    checked={paymentOption === "single"}
-                                                    onChange={() => setPaymentOption("single")}
-                                                    className="w-4 h-4 text-brand-primary focus:ring-brand-primary"
-                                                />
-                                                <div className="flex flex-col">
-                                                    <span className="font-semibold text-gray-900">Pay per session ($25)</span>
-                                                    <span className="text-xs text-gray-500">You will be charged $25 today for the first session.</span>
-                                                </div>
-                                            </label>
-                                            <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border bg-white hover:border-brand-primary transition-colors">
-                                                <input
-                                                    type="radio"
-                                                    name="paymentOption"
-                                                    value="full"
-                                                    checked={paymentOption === "full"}
-                                                    onChange={() => setPaymentOption("full")}
-                                                    className="w-4 h-4 text-brand-primary focus:ring-brand-primary"
-                                                />
-                                                <div className="flex flex-col">
-                                                    <span className="font-semibold text-gray-900">Pay fully for 12 sessions ($300)</span>
-                                                    <span className="text-xs text-gray-500">Save time by paying for all 12 sessions upfront.</span>
-                                                </div>
-                                            </label>
+                                    <>
+                                        <div className="bg-brand-primary-50 p-4 rounded-xl border border-brand-primary-100 mb-4">
+                                            <label className="block text-sm font-bold text-gray-900 mb-3">Why are you taking the course?</label>
+                                            <div className="space-y-3">
+                                                {["Court Order", "self development", "Work issue", "Other(explain)"].map((opt) => (
+                                                    <label key={opt} className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border bg-white hover:border-brand-primary transition-colors">
+                                                        <input
+                                                            type="radio"
+                                                            name="reason"
+                                                            value={opt}
+                                                            checked={reason === opt}
+                                                            onChange={() => setReason(opt)}
+                                                            required
+                                                            className="w-4 h-4 text-brand-primary focus:ring-brand-primary"
+                                                        />
+                                                        <span className="font-semibold text-gray-900">{opt}</span>
+                                                    </label>
+                                                ))}
+                                                {reason === "Other(explain)" && (
+                                                    <div className="mt-2 ml-7">
+                                                        <input
+                                                            type="text"
+                                                            required
+                                                            placeholder="Please explain..."
+                                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-brand-primary focus:border-brand-primary"
+                                                            value={otherReason}
+                                                            onChange={(e) => setOtherReason(e.target.value)}
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div className="bg-brand-primary-50 p-4 rounded-xl border border-brand-primary-100 mb-4">
+                                            <label className="block text-sm font-bold text-gray-900 mb-3">Payment Option</label>
+                                            <div className="space-y-3">
+                                                <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border bg-white hover:border-brand-primary transition-colors">
+                                                    <input
+                                                        type="radio"
+                                                        name="paymentOption"
+                                                        value="single"
+                                                        checked={paymentOption === "single"}
+                                                        onChange={() => setPaymentOption("single")}
+                                                        className="w-4 h-4 text-brand-primary focus:ring-brand-primary"
+                                                    />
+                                                    <div className="flex flex-col">
+                                                        <span className="font-semibold text-gray-900">Pay per session ($25)</span>
+                                                        <span className="text-xs text-gray-500">You will be charged $25 today for the first session.</span>
+                                                    </div>
+                                                </label>
+                                                <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border bg-white hover:border-brand-primary transition-colors">
+                                                    <input
+                                                        type="radio"
+                                                        name="paymentOption"
+                                                        value="full"
+                                                        checked={paymentOption === "full"}
+                                                        onChange={() => setPaymentOption("full")}
+                                                        className="w-4 h-4 text-brand-primary focus:ring-brand-primary"
+                                                    />
+                                                    <div className="flex flex-col">
+                                                        <span className="font-semibold text-gray-900">Pay fully for 12 sessions ($300)</span>
+                                                        <span className="text-xs text-gray-500">Save time by paying for all 12 sessions upfront.</span>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </>
                                 )}
 
                                 {error && <p className="text-red-500 text-sm">{error}</p>}

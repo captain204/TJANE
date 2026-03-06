@@ -17,7 +17,7 @@ export async function POST(req: Request) {
         const session = await stripe.checkout.sessions.retrieve(session_id);
 
         if (session.payment_status === 'paid' && session.metadata?.email_sent === 'false') {
-            const { course, date, time, name, email, phone, notes } = session.metadata;
+            const { course, date, time, name, email, phone, notes, reason } = session.metadata;
 
             const htmlContent = `
         <h3>New Course Booking Confirmed</h3>
@@ -27,6 +27,7 @@ export async function POST(req: Request) {
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
+        ${reason && reason !== 'N/A' ? `<p><strong>Reason for taking course:</strong> ${reason}</p>` : ''}
         <p><strong>Notes:</strong> ${notes}</p>
         <p><strong>Amount Paid:</strong> $25.00 USD</p>
       `;

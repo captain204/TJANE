@@ -9,7 +9,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const { course, date, time, name, email, phone, notes, paymentOption } = body;
+        const { course, date, time, name, email, phone, notes, paymentOption, reason } = body;
 
         const selectedCourse = COURSES.find(c => c.title === course);
         let unit_amount = (selectedCourse as any)?.price ? Math.round((selectedCourse as any).price * 100) : 2500; // default to $25.00 in cents
@@ -51,6 +51,7 @@ export async function POST(req: Request) {
                 email,
                 phone,
                 notes: notes || 'N/A',
+                reason: reason || 'N/A',
                 email_sent: 'false',
             },
         });
