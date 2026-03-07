@@ -374,7 +374,7 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
                                                     />
                                                     <div className="flex flex-col">
                                                         <span className="font-semibold text-gray-900">Pay per session ($25)</span>
-                                                        <span className="text-xs text-gray-500">You will be charged $25 today for the first session.</span>
+                                                        <span className="text-xs text-gray-500">You will be charged $25 today for the first session</span>
                                                     </div>
                                                 </label>
                                                 <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border bg-white hover:border-brand-primary transition-colors">
