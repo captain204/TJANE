@@ -335,34 +335,29 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
                                         {isAngerManagementPage && (
                                             <div className="bg-brand-primary-50 p-4 rounded-xl border border-brand-primary-100 mb-4">
                                                 <label className="block text-sm font-bold text-gray-900 mb-3">Why are you taking the course?</label>
-                                                <div className="space-y-3">
+                                                <select
+                                                    required
+                                                    className="w-full p-3 border rounded-xl bg-white focus:ring-2 focus:ring-brand-primary-500 transition-all font-medium"
+                                                    value={reason}
+                                                    onChange={(e) => setReason(e.target.value)}
+                                                >
+                                                    <option value="">-- Select a reason --</option>
                                                     {["Court Order", "self development", "Work issue", "Other(explain)"].map((opt) => (
-                                                        <label key={opt} className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border bg-white hover:border-brand-primary transition-colors">
-                                                            <input
-                                                                type="radio"
-                                                                name="reason"
-                                                                value={opt}
-                                                                checked={reason === opt}
-                                                                onChange={() => setReason(opt)}
-                                                                required
-                                                                className="w-4 h-4 text-brand-primary focus:ring-brand-primary"
-                                                            />
-                                                            <span className="font-semibold text-gray-900">{opt}</span>
-                                                        </label>
+                                                        <option key={opt} value={opt}>{opt}</option>
                                                     ))}
-                                                    {reason === "Other(explain)" && (
-                                                        <div className="mt-2 ml-7">
-                                                            <input
-                                                                type="text"
-                                                                required
-                                                                placeholder="Please explain..."
-                                                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-brand-primary focus:border-brand-primary"
-                                                                value={otherReason}
-                                                                onChange={(e) => setOtherReason(e.target.value)}
-                                                            />
-                                                        </div>
-                                                    )}
-                                                </div>
+                                                </select>
+                                                {reason === "Other(explain)" && (
+                                                    <div className="mt-4">
+                                                        <input
+                                                            type="text"
+                                                            required
+                                                            placeholder="Please explain..."
+                                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-brand-primary focus:border-brand-primary"
+                                                            value={otherReason}
+                                                            onChange={(e) => setOtherReason(e.target.value)}
+                                                        />
+                                                    </div>
+                                                )}
                                             </div>
                                         )}
                                         <div className="bg-brand-primary-50 p-4 rounded-xl border border-brand-primary-100 mb-4">
