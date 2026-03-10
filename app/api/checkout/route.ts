@@ -25,6 +25,8 @@ export async function POST(req: Request) {
             productName = `Booking for ${course} (Per Session)`;
         }
 
+        const successPath = course === "Anger Management" ? '/anger-management-intake' : '/booking-success';
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [
@@ -41,7 +43,7 @@ export async function POST(req: Request) {
                 },
             ],
             mode: 'payment',
-            success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/booking-success?session_id={CHECKOUT_SESSION_ID}`,
+            success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}${successPath}?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/courses`,
             metadata: {
                 course,
