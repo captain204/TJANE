@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Loader2, CheckCircle2 } from 'lucide-react';
 
 export default function AngerManagementIntakePage() {
@@ -78,6 +78,24 @@ export default function AngerManagementIntakePage() {
         signature: '',
         dateSigned: ''
     });
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            const fullName = params.get('fullName');
+            const email = params.get('email');
+            const phone = params.get('phone');
+
+            if (fullName || email || phone) {
+                setFormData(prev => ({
+                    ...prev,
+                    ...(fullName && { fullName }),
+                    ...(email && { email }),
+                    ...(phone && { phone }),
+                }));
+            }
+        }
+    }, []);
 
     const handleCheckboxChange = (field: 'triggers' | 'responses' | 'copingSkills' | 'goals', value: string) => {
         setFormData(prev => {

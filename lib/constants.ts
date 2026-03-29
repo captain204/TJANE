@@ -159,5 +159,12 @@ export const COURSES = [
         description: "Comprehensive 12-session anger management course designed to help you understand and manage your emotions effectively.",
         image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         tags: ["Mental Health", "Wellness"]
+    },
+    {
+        title: "Mandt System Training",
+        slug: "mandt-system",
+        description: "Comprehensive training to acknowledge and manage emotions, choose constructive behaviors, and maintain safety.",
+        image: "https://images.unsplash.com/photo-1543269664-56d74c65a38e?q=80&w=800&auto=format&fit=crop",
+        tags: ["Training", "Safety", "Mandt System"]
     }
 ];

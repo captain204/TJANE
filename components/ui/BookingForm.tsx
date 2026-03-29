@@ -14,7 +14,7 @@ interface BookingFormProps {
 }
 
 export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormProps) => {
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(isAngerManagementPage ? 3 : 1);
     const [selectedCourse, setSelectedCourse] = useState(courseTitle || "");
     const [date, setDate] = useState<Date | undefined>(new Date());
     const [time, setTime] = useState("");
@@ -65,12 +65,23 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
     const timeSlots = generateTimeSlots();
 
     const handleNext = () => {
-        if (step === 1 && (!date || !selectedCourse)) return;
+        if (step === 1) {
+            if (!selectedCourse) return;
+            if (selectedCourse === "Anger Management") {
+                setStep(3);
+                return;
+            }
+            if (!date) return;
+        }
         if (step === 2 && !time) return;
         setStep(step + 1);
     };
 
     const handleBack = () => {
+        if (step === 3 && selectedCourse === "Anger Management" && !isAngerManagementPage) {
+            setStep(1);
+            return;
+        }
         setStep(step - 1);
     };
 
@@ -78,6 +89,16 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
         e.preventDefault();
         setIsSubmitting(true);
         setError("");
+
+        if (selectedCourse === "Anger Management") {
+            const params = new URLSearchParams({
+                fullName: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+            });
+            window.location.href = `/anger-management-intake?${params.toString()}`;
+            return;
+        }
 
         try {
             const res = await fetch('/api/checkout', {
@@ -144,20 +165,29 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
             <div className="bg-brand-primary-900 p-6 text-white">
                 <h3 className="text-xl font-bold mb-4">{selectedCourse ? `Book ${selectedCourse}` : 'Book a Class'}</h3>
                 <div className="flex items-center justify-between text-sm px-2">
-                    <div className={`flex flex-col items-center ${step >= 1 ? 'text-white' : 'text-brand-primary-400'}`}>
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${step >= 1 ? 'bg-white text-brand-primary-900 font-bold' : 'bg-brand-primary-800'}`}>1</div>
-                        <span>Date</span>
-                    </div>
-                    <div className={`h-0.5 w-full mx-2 ${step >= 2 ? 'bg-white' : 'bg-brand-primary-800'}`} />
-                    <div className={`flex flex-col items-center ${step >= 2 ? 'text-white' : 'text-brand-primary-400'}`}>
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${step >= 2 ? 'bg-white text-brand-primary-900 font-bold' : 'bg-brand-primary-800'}`}>2</div>
-                        <span>Time</span>
-                    </div>
-                    <div className={`h-0.5 w-full mx-2 ${step >= 3 ? 'bg-white' : 'bg-brand-primary-800'}`} />
-                    <div className={`flex flex-col items-center ${step >= 3 ? 'text-white' : 'text-brand-primary-400'}`}>
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${step >= 3 ? 'bg-white text-brand-primary-900 font-bold' : 'bg-brand-primary-800'}`}>3</div>
-                        <span>Details</span>
-                    </div>
+                    {selectedCourse !== "Anger Management" ? (
+                        <>
+                            <div className={`flex flex-col items-center ${step >= 1 ? 'text-white' : 'text-brand-primary-400'}`}>
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${step >= 1 ? 'bg-white text-brand-primary-900 font-bold' : 'bg-brand-primary-800'}`}>1</div>
+                                <span>Date</span>
+                            </div>
+                            <div className={`h-0.5 w-full mx-2 ${step >= 2 ? 'bg-white' : 'bg-brand-primary-800'}`} />
+                            <div className={`flex flex-col items-center ${step >= 2 ? 'text-white' : 'text-brand-primary-400'}`}>
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${step >= 2 ? 'bg-white text-brand-primary-900 font-bold' : 'bg-brand-primary-800'}`}>2</div>
+                                <span>Time</span>
+                            </div>
+                            <div className={`h-0.5 w-full mx-2 ${step >= 3 ? 'bg-white' : 'bg-brand-primary-800'}`} />
+                            <div className={`flex flex-col items-center ${step >= 3 ? 'text-white' : 'text-brand-primary-400'}`}>
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${step >= 3 ? 'bg-white text-brand-primary-900 font-bold' : 'bg-brand-primary-800'}`}>3</div>
+                                <span>Details</span>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="flex flex-col items-center w-full text-white">
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center mb-1 bg-white text-brand-primary-900 font-bold">1</div>
+                            <span>Biodata Details</span>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -194,10 +224,10 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
                             <div className="flex justify-end pt-4">
                                 <button
                                     onClick={handleNext}
-                                    disabled={!date || !selectedCourse}
+                                    disabled={!selectedCourse || (selectedCourse !== "Anger Management" && !date)}
                                     className="flex items-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-lg hover:bg-brand-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                 >
-                                    Continue to Time Selection <ArrowRight size={18} />
+                                    {selectedCourse === "Anger Management" ? "Continue to Details" : "Continue to Time Selection"} <ArrowRight size={18} />
                                 </button>
                             </div>
                         </motion.div>
@@ -360,39 +390,6 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
                                                 )}
                                             </div>
                                         )}
-                                        <div className="bg-brand-primary-50 p-4 rounded-xl border border-brand-primary-100 mb-4">
-                                            <label className="block text-sm font-bold text-gray-900 mb-3">Payment Option</label>
-                                            <div className="space-y-3">
-                                                <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border bg-white hover:border-brand-primary transition-colors">
-                                                    <input
-                                                        type="radio"
-                                                        name="paymentOption"
-                                                        value="single"
-                                                        checked={paymentOption === "single"}
-                                                        onChange={() => setPaymentOption("single")}
-                                                        className="w-4 h-4 text-brand-primary focus:ring-brand-primary"
-                                                    />
-                                                    <div className="flex flex-col">
-                                                        <span className="font-semibold text-gray-900">Pay per session ($25)</span>
-                                                        <span className="text-xs text-gray-500">You will be charged $25 today for the first session</span>
-                                                    </div>
-                                                </label>
-                                                <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg border bg-white hover:border-brand-primary transition-colors">
-                                                    <input
-                                                        type="radio"
-                                                        name="paymentOption"
-                                                        value="full"
-                                                        checked={paymentOption === "full"}
-                                                        onChange={() => setPaymentOption("full")}
-                                                        className="w-4 h-4 text-brand-primary focus:ring-brand-primary"
-                                                    />
-                                                    <div className="flex flex-col">
-                                                        <span className="font-semibold text-gray-900">Pay fully for 12 sessions ($300)</span>
-                                                        <span className="text-xs text-gray-500">Save time by paying for all 12 sessions upfront.</span>
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
                                     </>
                                 )}
 

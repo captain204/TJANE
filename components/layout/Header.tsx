@@ -24,7 +24,6 @@ const Header = () => {
 
     const services = [
         { name: "Trainings", href: "/services" },
-        { name: "Career program", href: "https://www.careerstep.com/lp/partner/ap/tjanehealth/", external: true },
         { name: "Staffing agency", href: "/staffing-agency" },
         { name: "Careers", href: "/careers" },
     ];
@@ -36,7 +35,6 @@ const Header = () => {
         { name: "Pharmacy Technician", href: "/courses/pharmacy-technician" },
         { name: "Mental Health Technician", href: "/courses/mental-health-technician" },
         { name: "Patient Care Technician", href: "/courses/patient-care-technician" },
-        { name: "Anger Management", href: "/anger-management" },
         { name: "All other programs", href: "/courses/other-programs" },
     ];
 
@@ -77,6 +75,26 @@ const Header = () => {
                         >
                             About Us
                         </Link>
+                        <Link
+                            href="https://www.careerstep.com/lp/partner/ap/tjanehealth/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-700 hover:text-brand-primary font-medium transition-colors duration-200"
+                        >
+                            Career Programs
+                        </Link>
+                        <Link
+                            href="/anger-management"
+                            className="text-gray-700 hover:text-brand-primary font-medium transition-colors duration-200"
+                        >
+                            Anger Management
+                        </Link>
+                        <Link
+                            href="/mandt-system"
+                            className="text-gray-700 hover:text-brand-primary font-medium transition-colors duration-200"
+                        >
+                            Mandt Systems
+                        </Link>
 
                         {/* Services Dropdown */}
                         <div
@@ -109,8 +127,6 @@ const Header = () => {
                                                 <Link
                                                     key={service.name}
                                                     href={service.href}
-                                                    target={service.external ? "_blank" : undefined}
-                                                    rel={service.external ? "noopener noreferrer" : undefined}
                                                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-primary-50 hover:text-brand-primary-600 transition-colors duration-150"
                                                 >
                                                     {service.name}
@@ -216,6 +232,29 @@ const Header = () => {
                             >
                                 About Us
                             </Link>
+                            <Link
+                                href="https://www.careerstep.com/lp/partner/ap/tjanehealth/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-primary hover:bg-gray-50 transition-colors"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Career Programs
+                            </Link>
+                            <Link
+                                href="/anger-management"
+                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-primary hover:bg-gray-50 transition-colors"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Anger Management
+                            </Link>
+                            <Link
+                                href="/mandt-system"
+                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-primary hover:bg-gray-50 transition-colors"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Mandt Systems
+                            </Link>
 
                             {/* Mobile Services */}
                             <div className="pt-2 pb-2">
@@ -226,8 +265,6 @@ const Header = () => {
                                     <Link
                                         key={service.name}
                                         href={service.href}
-                                        target={service.external ? "_blank" : undefined}
-                                        rel={service.external ? "noopener noreferrer" : undefined}
                                         className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-brand-primary hover:bg-gray-50 transition-colors pl-6"
                                         onClick={() => setIsOpen(false)}
                                     >
