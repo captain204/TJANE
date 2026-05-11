@@ -87,7 +87,7 @@ export const CourseDetail = ({ course }: { course: Course }) => {
                             {[
                                 { icon: Clock, text: "Self-Paced / Flexible" },
                                 { icon: Award, text: "Official Certification" },
-                                { icon: MapPin, text: "Multiple Locations" },
+                                { icon: MapPin, text: "Online" },
                                 { icon: CheckCircle2, text: "Hands-on Training" }
                             ].map((item, idx) => (
                                 <motion.div

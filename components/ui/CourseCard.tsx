@@ -21,7 +21,7 @@ export const CourseCard = ({
     image,
     slug,
     duration = "Flexible",
-    location = "Multiple Locations",
+    location = "Online",
     certification = "Certified",
 }: CourseCardProps) => {
     return (
@@ -56,10 +56,12 @@ export const CourseCard = ({
                                 <Clock size={16} className="text-brand-secondary-500" />
                                 <span>{duration}</span>
                             </div>
-                            <div className="flex items-center gap-1.5">
-                                <MapPin size={16} className="text-brand-secondary-500" />
-                                <span>{location}</span>
-                            </div>
+                            {location && (
+                                <div className="flex items-center gap-1.5">
+                                    <MapPin size={16} className="text-brand-secondary-500" />
+                                    <span>{location}</span>
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex items-center justify-end pt-2">

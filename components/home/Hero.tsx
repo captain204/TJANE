@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, HeartPulse } from "lucide-react";
+import { ArrowRight, ShieldCheck, HeartPulse, GraduationCap } from "lucide-react";
 
 export const Hero = () => {
     return (
@@ -12,7 +12,7 @@ export const Hero = () => {
                 {/* Placeholder for video or high-quality image */}
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-primary-950/90 to-brand-primary-900/40 z-10" />
                 <div
-                    className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center"
+                    className="absolute inset-0 bg-[url('/images/training/training-1.jpg')] bg-cover bg-center"
                 />
             </div>
 
@@ -46,7 +46,7 @@ export const Hero = () => {
                                 href="/services"
                                 className="bg-brand-secondary-500 hover:bg-brand-secondary-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-brand-secondary-500/20 transition-all hover:scale-105 flex items-center gap-2"
                             >
-                                Find a Class
+                                View All Courses
                                 <ArrowRight size={20} />
                             </Link>
                             <Link
@@ -69,7 +69,7 @@ export const Hero = () => {
                         </div>
                     </motion.div>
 
-                    {/* Right Column - Ideally simpler or visual interactive element */}
+                    {/* Right Column - Simplified */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -81,26 +81,27 @@ export const Hero = () => {
                         <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl">
                             <div className="flex items-center gap-4 mb-6">
                                 <div className="bg-brand-primary-500 p-3 rounded-full">
-                                    <HeartPulse size={32} className="text-white" />
+                                    <GraduationCap size={32} className="text-white" />
                                 </div>
                                 <div>
-                                    <h3 className="text-white text-xl font-bold">Today's Availability</h3>
-                                    <p className="text-brand-secondary-300 text-sm">Book your spot now</p>
+                                    <h3 className="text-white text-xl font-bold">Quick Certification</h3>
+                                    <p className="text-brand-secondary-300 text-sm">Flexible online learning</p>
                                 </div>
                             </div>
-                            {/* Mini list representation */}
+                            
                             <div className="space-y-4">
-                                {[1, 2, 3].map((_, i) => (
-                                    <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-colors cursor-pointer">
-                                        <div className="text-white">
-                                            <p className="font-bold">BLS Provider</p>
-                                            <p className="text-xs text-gray-400">09:00 AM - 1:00 PM</p>
-                                        </div>
-                                        <div className="text-brand-secondary-400 text-sm font-semibold">
-                                            $85
-                                        </div>
-                                    </div>
-                                ))}
+                                <div className="p-4 bg-white/5 rounded-xl border border-white/5">
+                                    <p className="text-white font-bold mb-1">Official AHA Training</p>
+                                    <p className="text-xs text-gray-400 leading-relaxed">Receive your official eCard immediately upon successful course completion.</p>
+                                </div>
+                                <div className="p-4 bg-white/5 rounded-xl border border-white/5">
+                                    <p className="text-white font-bold mb-1">Self-Paced Learning</p>
+                                    <p className="text-xs text-gray-400 leading-relaxed">Start anytime and complete your training at your own convenience.</p>
+                                </div>
+                                <div className="p-4 bg-white/5 rounded-xl border border-white/5">
+                                    <p className="text-white font-bold mb-1">Expert Support</p>
+                                    <p className="text-xs text-gray-400 leading-relaxed">Dedicated instructors available to assist you throughout your certification.</p>
+                                </div>
                             </div>
                         </div>
                     </motion.div>

@@ -62,7 +62,7 @@ export const COURSES = [
         title: "CPR AED Training + First Aid Training",
         slug: "cpr-aed-first-aid-training",
         description: "Comprehensive training covering CPR, AED usage, and essential First Aid skills for various emergencies.",
-        image: "https://images.unsplash.com/photo-1516574187841-69301905a304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        image: "/images/training/training-3.jpg",
         tags: ["CPR", "AED", "First Aid"]
     },
     {
@@ -93,7 +93,7 @@ export const COURSES = [
         price: 85,
         slug: "bls-provider-aha",
         description: "Teaches healthcare professionals lifesaving skills like high-quality CPR, ventilations, and AED use.",
-        image: "https://images.unsplash.com/photo-1576091160550-2187d80a5873?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        image: "/images/training/training-2.jpg",
         tags: ["BLS", "Renewal"]
     },
     {
@@ -164,7 +164,7 @@ export const COURSES = [
         title: "Mandt System Training",
         slug: "mandt-system",
         description: "Comprehensive training to acknowledge and manage emotions, choose constructive behaviors, and maintain safety.",
-        image: "https://images.unsplash.com/photo-1543269664-56d74c65a38e?q=80&w=800&auto=format&fit=crop",
+        image: "/images/training/training-1.jpg",
         tags: ["Training", "Safety", "Mandt System"]
     }
 ];

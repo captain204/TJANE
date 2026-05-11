@@ -1,6 +1,7 @@
 "use client";
 
 import { Hero } from "@/components/home/Hero";
+import Image from "next/image";
 import { BookingForm } from "@/components/ui/BookingForm";
 import { CourseCard } from "@/components/ui/CourseCard";
 import { GoogleReviews } from "@/components/ui/GoogleReviews";
@@ -44,13 +45,13 @@ export default function Home() {
           <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100/50">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               <div>
-                <span className="text-brand-secondary-600 font-bold tracking-wider uppercase text-sm">Schedule Now</span>
+                <span className="text-brand-secondary-600 font-bold tracking-wider uppercase text-sm">Book Now</span>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">
-                  Find a Course Near You
+                  Book a Class
                 </h2>
                 <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                  Our interactive calendar makes it easy to find a class that fits your schedule.
-                  Select a date to view available time slots for CPR, BLS, and First Aid training.
+                  Our flexible online courses allow you to learn at your own pace from anywhere.
+                  Simply fill out the form to book your course and begin your certification journey.
                   <br /><br />
                   <strong>Need a private group class?</strong> <a href="/corporate-training" className="text-brand-primary-600 font-semibold hover:underline">Contact us</a> for corporate rates.
                 </p>
@@ -62,8 +63,8 @@ export default function Home() {
                     ))}
                   </div>
                   <div className="text-sm text-gray-500 flex flex-col justify-center">
-                    <span className="font-bold text-gray-900">500+</span>
-                    <span>Classes / Year</span>
+                    <span className="font-bold text-gray-900">10k+</span>
+                    <span>Students / Year</span>
                   </div>
                 </div>
               </div>
@@ -72,6 +73,41 @@ export default function Home() {
                 <BookingForm />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Training Gallery Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Hands-on Professional Training
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Real-world scenarios and expert instruction to ensure you are prepared for any emergency.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { src: "/images/training/training-1.jpg", alt: "Classroom Training" },
+              { src: "/images/training/training-2.jpg", alt: "Hands-on CPR Session" },
+              { src: "/images/training/training-3.jpg", alt: "Practical Skills Assessment" }
+            ].map((img, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.02 }}
+                className="relative h-64 rounded-2xl overflow-hidden shadow-lg border border-gray-100"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

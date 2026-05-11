@@ -171,33 +171,15 @@ export default function MandtSystemPage() {
                             <div className="bg-brand-primary-600 p-3 rounded-lg text-white">
                                 <CalendarDays className="w-6 h-6" />
                             </div>
-                            <h3 className="text-2xl font-bold text-gray-900">Scheduled Classes</h3>
+                            <h3 className="text-2xl font-bold text-gray-900">Training Schedule</h3>
                         </div>
 
                         <div className="space-y-6">
-                            <div>
-                                <h4 className="text-lg font-bold text-brand-primary-800 mb-3 border-b border-gray-200 pb-2">Mandt 2-Day (9am-5pm/day)</h4>
-                                <ul className="space-y-2">
-                                    {['3/25 – 3/26', '6/10 – 6/11', '9/21 – 9/22', '11/30 – 12/1'].map((date, i) => (
-                                        <li key={i} className="flex justify-between items-center text-gray-700 bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
-                                            <span className="font-semibold">{date}</span>
-                                            <span className="text-sm text-gray-500">9:00 AM – 5:00 PM</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            <div>
-                                <h4 className="text-lg font-bold text-brand-primary-800 mb-3 border-b border-gray-200 pb-2">Mandt Refresher 1-Day (9am-5pm)</h4>
-                                <ul className="space-y-2">
-                                    {['4/24', '8/19', '12/18'].map((date, i) => (
-                                        <li key={i} className="flex justify-between items-center text-gray-700 bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
-                                            <span className="font-semibold">{date}</span>
-                                            <span className="text-sm text-gray-500">9:00 AM – 5:00 PM</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                            <p className="text-gray-700 leading-relaxed">
+                                We offer flexible options for both our 2-day comprehensive course and 1-day refresher training.
+                                <br /><br />
+                                <strong>Upcoming Sessions:</strong> Our training sessions are available on a rolling basis. Please contact us or submit the request form below to find the next available date that fits your needs.
+                            </p>
                         </div>
 
                         <div className="mt-8 pt-6 border-t border-gray-200 text-center">

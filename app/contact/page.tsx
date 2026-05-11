@@ -18,7 +18,7 @@ const FAQS = [
     },
     {
         q: "What if I need to cancel?",
-        a: "We offer full refunds for cancellations made at least 24 hours in advance. Rescheduling is free."
+        a: "We offer full refunds for cancellations made at least 24 hours in advance. Support is free."
     },
     {
         q: "Do you offer group discounts?",
@@ -33,7 +33,7 @@ export default function ContactPage() {
         <div className="bg-white min-h-screen">
             <PageHeader
                 title="Get in Touch"
-                subtitle="Have questions about a course or need to schedule group training? We're here to help."
+                subtitle="Have questions about a course or need to book group training? We're here to help."
                 breadcrumbs={[{ label: "Contact", href: "/contact" }]}
                 backgroundImage="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
             />

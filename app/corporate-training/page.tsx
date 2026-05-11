@@ -1,11 +1,10 @@
 "use client";
 
 import { PageHeader } from "@/components/ui/PageHeader";
-import { Button } from "@/components/ui/Button";
 import { useState } from "react";
-import { COURSES, COMPANY_INFO } from "@/lib/constants";
+import { COURSES } from "@/lib/constants";
 import { motion } from "framer-motion";
-import { CheckCircle2, MapPin, Send } from "lucide-react";
+import { CheckCircle2, Globe, Send, Users } from "lucide-react";
 
 export default function CorporateTrainingPage() {
     const [formData, setFormData] = useState({
@@ -13,8 +12,8 @@ export default function CorporateTrainingPage() {
         email: "",
         phone: "",
         company: "",
-        course: "", // specific course selection
-        location: "",
+        course: "",
+        studentCount: "",
         message: ""
     });
 
@@ -39,7 +38,7 @@ export default function CorporateTrainingPage() {
         <div className="bg-white min-h-screen">
             <PageHeader
                 title="Corporate Training"
-                subtitle="Customized health and safety training for your organization."
+                subtitle="Customized health and safety training for your organization, delivered online."
                 breadcrumbs={[{ label: "Corporate Training", href: "/corporate-training" }]}
             />
 
@@ -53,10 +52,10 @@ export default function CorporateTrainingPage() {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <h2 className="text-3xl font-bold text-gray-900 mb-6">Train Your Team</h2>
+                            <h2 className="text-3xl font-bold text-gray-900 mb-6">Train Your Entire Team</h2>
                             <p className="text-gray-600 mb-8 text-lg leading-relaxed">
                                 Ensure your workplace is compliant and safe with our comprehensive corporate training programs.
-                                We offer flexible scheduling and can train your staff at our facility or yours.
+                                Our online platform allows your staff to complete their certifications at their own pace, from anywhere.
                             </p>
 
                             <div className="space-y-6 mb-12">
@@ -65,17 +64,26 @@ export default function CorporateTrainingPage() {
                                         <CheckCircle2 size={24} />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-gray-900">Certified Instructors</h3>
-                                        <p className="text-gray-500">Learn from experienced professionals.</p>
+                                        <h3 className="font-semibold text-gray-900">Official AHA/Red Cross Training</h3>
+                                        <p className="text-gray-500">Nationally recognized certifications for your staff.</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
                                     <div className="bg-brand-primary-50 p-3 rounded-lg text-brand-primary-600">
-                                        <MapPin size={24} />
+                                        <Globe size={24} />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-gray-900">Flexible Locations</h3>
-                                        <p className="text-gray-500">Choose from our two convenient locations or we come to you (on request).</p>
+                                        <h3 className="font-semibold text-gray-900">100% Online Delivery</h3>
+                                        <p className="text-gray-500">No travel required. Your team can learn from their desks or home.</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-4">
+                                    <div className="bg-brand-primary-50 p-3 rounded-lg text-brand-primary-600">
+                                        <Users size={24} />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-semibold text-gray-900">Bulk Discounts Available</h3>
+                                        <p className="text-gray-500">Special pricing for organizations with 5 or more students.</p>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +102,7 @@ export default function CorporateTrainingPage() {
                                         <CheckCircle2 size={32} />
                                     </div>
                                     <h3 className="text-2xl font-bold text-gray-900 mb-2">Request Received!</h3>
-                                    <p className="text-gray-600">We'll be in touch shortly to coordinate your training.</p>
+                                    <p className="text-gray-600">We'll be in touch shortly to coordinate your corporate training package.</p>
                                     <button
                                         onClick={() => setIsSuccess(false)}
                                         className="mt-6 text-brand-primary-600 font-semibold hover:underline"
@@ -104,7 +112,7 @@ export default function CorporateTrainingPage() {
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-6">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-6">Book a Training</h3>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-6">Request Corporate Quote</h3>
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
@@ -124,6 +132,7 @@ export default function CorporateTrainingPage() {
                                             <input
                                                 type="text"
                                                 name="company"
+                                                required
                                                 value={formData.company}
                                                 onChange={handleChange}
                                                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-primary-500 focus:border-transparent outline-none transition-all"
@@ -159,40 +168,48 @@ export default function CorporateTrainingPage() {
                                         </div>
                                     </div>
 
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Select Course</label>
-                                        <select
-                                            name="course"
-                                            value={formData.course}
-                                            onChange={handleChange}
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-primary-500 focus:border-transparent outline-none transition-all bg-white"
-                                        >
-                                            <option value="">-- Choose a Course --</option>
-                                            {COURSES.map((course) => (
-                                                <option key={course.slug} value={course.slug}>
-                                                    {course.title}
-                                                </option>
-                                            ))}
-                                        </select>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1">Select Course</label>
+                                            <select
+                                                name="course"
+                                                required
+                                                value={formData.course}
+                                                onChange={handleChange}
+                                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-primary-500 focus:border-transparent outline-none transition-all bg-white"
+                                            >
+                                                <option value="">-- Choose a Course --</option>
+                                                {COURSES.map((course) => (
+                                                    <option key={course.slug} value={course.slug}>
+                                                        {course.title}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1">Approx. Students</label>
+                                            <input
+                                                type="number"
+                                                name="studentCount"
+                                                required
+                                                value={formData.studentCount}
+                                                onChange={handleChange}
+                                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-primary-500 focus:border-transparent outline-none transition-all"
+                                                placeholder="e.g. 10"
+                                            />
+                                        </div>
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Select Location</label>
-                                        <div className="space-y-3">
-                                            {COMPANY_INFO.locations.map((loc, idx) => (
-                                                <label key={idx} className="flex items-start gap-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                                                    <input
-                                                        type="radio"
-                                                        name="location"
-                                                        value={loc}
-                                                        checked={formData.location === loc}
-                                                        onChange={handleChange}
-                                                        className="mt-1 text-brand-primary-600 focus:ring-brand-primary-500"
-                                                    />
-                                                    <span className="text-sm text-gray-700">{loc}</span>
-                                                </label>
-                                            ))}
-                                        </div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
+                                        <textarea
+                                            name="message"
+                                            rows={4}
+                                            value={formData.message}
+                                            onChange={handleChange}
+                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-primary-500 focus:border-transparent outline-none transition-all"
+                                            placeholder="Any specific requirements?"
+                                        />
                                     </div>
 
                                     <button
@@ -204,7 +221,7 @@ export default function CorporateTrainingPage() {
                                             "Sending..."
                                         ) : (
                                             <>
-                                                Submit Request <Send size={18} />
+                                                Submit Quote Request <Send size={18} />
                                             </>
                                         )}
                                     </button>
