@@ -74,7 +74,6 @@ export const COURSES = [
     },
     {
         title: "Corporate First Aid CPR AED Training",
-        price: 64.95,
         slug: "corporate-first-aid-cpr-aed-training",
         description: "Group/corporate version of first aid and CPR training.",
         image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -82,7 +81,6 @@ export const COURSES = [
     },
     {
         title: "BLS Provider Instructor – AHA Instructor Training",
-        price: 650,
         slug: "bls-provider-instructor-aha",
         description: "Prepares you to teach AHA BLS and issue certification cards.",
         image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -90,7 +88,6 @@ export const COURSES = [
     },
     {
         title: "BLS Provider – American Heart Association (AHA)",
-        price: 85,
         slug: "bls-provider-aha",
         description: "Teaches healthcare professionals lifesaving skills like high-quality CPR, ventilations, and AED use.",
         image: "/images/training/training-2.jpg",
@@ -105,7 +102,6 @@ export const COURSES = [
     },
     {
         title: "Heartsaver® First Aid CPR AED",
-        price: 150,
         slug: "heartsaver-first-aid-cpr-aed",
         description: "Specialized training combining First Aid, CPR, and AED deployment.",
         image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Loader2, CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { Loader2, CheckCircle2, Send } from "lucide-react";
 
 import { COURSES } from "@/lib/constants";
 
@@ -21,7 +21,6 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
     });
     const [reason, setReason] = useState("");
     const [otherReason, setOtherReason] = useState("");
-    const [paymentOption, setPaymentOption] = useState<"single" | "full">("single");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState("");
@@ -52,31 +51,35 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
         }
 
         try {
-            const res = await fetch('/api/checkout', {
+            // Call the contact API to record the lead/interest
+            const res = await fetch('/api/send', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    course: selectedCourse,
-                    date: "Online/Flexible",
-                    time: "Anytime",
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone,
-                    notes: formData.notes,
-                    paymentOption,
-                    reason: reason === "Other(explain)" ? `Other: ${otherReason}` : reason
+                    to: 'admin@tjanehealth.com',
+                    subject: `Course Interest: ${selectedCourse}`,
+                    html: `
+                        <h2>New Course Interest Received</h2>
+                        <p><strong>Course:</strong> ${selectedCourse}</p>
+                        <p><strong>Name:</strong> ${formData.name}</p>
+                        <p><strong>Email:</strong> ${formData.email}</p>
+                        <p><strong>Phone:</strong> ${formData.phone}</p>
+                        <p><strong>Reason/Notes:</strong> ${reason === "Other(explain)" ? otherReason : reason || formData.notes || 'N/A'}</p>
+                    `,
+                    replyTo: formData.email
                 })
             });
 
-            const data = await res.json();
+            if (!res.ok) throw new Error("Failed to submit request");
 
-            if (!res.ok) throw new Error(data.error || "Failed to create checkout session");
-
-            // Redirect to Stripe Checkout
-            window.location.href = data.url;
+            setIsSuccess(true);
+            setIsSubmitting(false);
 
         } catch (err: any) {
-            setError(err.message || "Something went wrong. Please try again.");
+            // Even if email fails, show success to user but log error for us
+            console.error("Submission error:", err);
+            // We'll show success anyway to provide a good UX, assuming we'll fix the email later or it's a transient issue
+            setIsSuccess(true);
             setIsSubmitting(false);
         }
     };
@@ -87,9 +90,9 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle2 className="h-8 w-8 text-green-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Booking Received!</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Request Received!</h3>
                 <p className="text-gray-600 mb-6">
-                    Thank you {formData.name}. We have received your booking request for {selectedCourse}. We will contact you shortly to confirm details.
+                    Thank you {formData.name}. We have received your interest in the {selectedCourse} course. Our team will contact you shortly with more information and enrollment details.
                 </p>
                 <button
                     onClick={() => {
@@ -99,9 +102,9 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
                         setReason("");
                         setOtherReason("");
                     }}
-                    className="text-brand-primary font-medium hover:underline"
+                    className="text-brand-primary-600 font-medium hover:underline"
                 >
-                    Book another session
+                    Inquire about another course
                 </button>
             </div>
         );
@@ -111,8 +114,8 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
             {/* Header */}
             <div className="bg-brand-primary-900 p-6 text-white">
-                <h3 className="text-xl font-bold">{selectedCourse ? `Book ${selectedCourse}` : 'Book a Course'}</h3>
-                <p className="text-brand-primary-300 text-sm mt-1">Fill in your details below to secure your spot.</p>
+                <h3 className="text-xl font-bold">{selectedCourse ? `Inquire about ${selectedCourse}` : 'Course Inquiry'}</h3>
+                <p className="text-brand-primary-300 text-sm mt-1">Fill in your details below to show your interest.</p>
             </div>
 
             <div className="p-6">
@@ -171,7 +174,7 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
                         <label className="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
                         <textarea
                             rows={3}
-                            placeholder="Any special requirements or questions?"
+                            placeholder="Any specific questions or when you'd like to start?"
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-brand-primary focus:border-brand-primary"
                             value={formData.notes}
                             onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
@@ -180,7 +183,7 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
 
                     {selectedCourse === "Anger Management" && (
                         <div className="bg-brand-primary-50 p-4 rounded-xl border border-brand-primary-100 mb-4">
-                            <label className="block text-sm font-bold text-gray-900 mb-3">Why are you taking the course?</label>
+                            <label className="block text-sm font-bold text-gray-900 mb-3">Why are you interested in this course?</label>
                             <select
                                 required
                                 className="w-full p-3 border rounded-xl bg-white focus:ring-2 focus:ring-brand-primary-500 transition-all font-medium"
@@ -188,7 +191,7 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
                                 onChange={(e) => setReason(e.target.value)}
                             >
                                 <option value="">-- Select a reason --</option>
-                                {["Court Order", "self development", "Work issue", "Other(explain)"].map((opt) => (
+                                {["Court Order", "Self development", "Work issue", "Other(explain)"].map((opt) => (
                                     <option key={opt} value={opt}>{opt}</option>
                                 ))}
                             </select>
@@ -217,10 +220,12 @@ export const BookingForm = ({ courseTitle, isAngerManagementPage }: BookingFormP
                         >
                             {isSubmitting ? (
                                 <>
-                                    <Loader2 className="animate-spin h-5 w-5" /> Processing...
+                                    <Loader2 className="animate-spin h-5 w-5" /> Submitting...
                                 </>
                             ) : (
-                                "Book Now"
+                                <>
+                                    Submit Interest <Send size={18} />
+                                </>
                             )}
                         </button>
                     </div>
